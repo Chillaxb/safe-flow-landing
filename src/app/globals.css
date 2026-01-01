@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
+    --font-inter: "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-inter);
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* Hide Next.js dev indicator */
+#__next-build-indicator,
+[data-nextjs-dialog],
+[data-nextjs-toast] {
+    display: none !important;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Global container centering */
+.container-center {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .container-center {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+/* Section centering */
+section {
+    width: 100%;
+}
+
+/* Ensure all main content is centered */
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > * {
+    width: 100%;
+}
+
+/* Text alignment helpers */
+.text-center-mobile {
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .text-center-mobile {
+        text-align: left;
+    }
+}
+
+/* Grid centering */
+.grid-centered {
+    display: grid;
+    place-items: center;
+}
+
+/* Flex centering */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Scrollbar - Neutral colors to avoid blue bar */
+::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Mobile responsive improvements */
+@media (max-width: 767px) {
+    h1 {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    h3 {
+        font-size: 1.25rem !important;
+    }
+
+    p {
+        font-size: 1rem !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+/* Ensure images don't break layout */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Fix for content width */
+.content-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
