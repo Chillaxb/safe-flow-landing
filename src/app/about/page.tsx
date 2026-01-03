@@ -1,16 +1,24 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
 
 export default function AboutPage() {
-    const pathname = usePathname()
-    const language = pathname?.startsWith("/fr") ? "fr" : "en"
+    const [language, setLanguage] = useState<"en" | "fr">("en")
+
+    useEffect(() => {
+        const savedLang = localStorage.getItem("safe-flow-lang") as "en" | "fr" | null
+        if (savedLang) {
+            setLanguage(savedLang)
+        }
+    }, [])
 
     const colors = {
-        primary: "#6366f1",
-        secondary: "#22c55e",
-        accent: "#f59e0b",
-        dark: "#0f172a",
+        primary: "#8B5CF6",        // Electric violet
+        primaryLight: "#A78BFA",
+        secondary: "#06B6D4",      // Vivid cyan
+        secondaryLight: "#22D3EE",
+        accent: "#22D3EE",         // Luminous cyan
+        dark: "#0F0F1A",           // Purple-black
         text: "#334155",
         textLight: "#64748b",
         bg: "#f8fafc",
@@ -19,91 +27,91 @@ export default function AboutPage() {
     const content = {
         en: {
             heroTitle: "The Story Behind Safe-Flow",
-            heroSubtitle: "From personal experimentation to science-backed optimization",
+            heroSubtitle: "A personal journey toward becoming my best self—and helping you do the same",
 
             introTitle: "Why I Built This",
             introParagraph1:
-                "I built Safe-Flow because I was tired of wellness apps that promised transformation without substance. I wanted a tool that respects the science, tracks real metrics, and actually delivers measurable results.",
+                "I created Safe-Flow because I believe everyone deserves access to the tools that can genuinely change their life. Not quick fixes or empty promises—but proven methods that help you grow, day by day.",
             introParagraph2:
-                "This isn't about selling you a 'feel-good' method. It's about giving you protocols backed by peer-reviewed research and the biofeedback tools to prove they work for you.",
+                "This isn't about perfection. It's about progress. It's about building a practice that fits your life and helps you become who you want to be.",
 
-            credentialsTitle: "My Training",
+            credentialsTitle: "My Practice",
             credentialsList: [
-                "Certified Wim Hof Method instructor (Level 2)",
+                "Wim Hof Method camps with IceMind instructors",
                 "10-day Vipassana meditation retreats annually",
                 "60+ hours of breathwork practice monthly",
-                "Personal HRV tracking since 2019",
+                "Tracking my own journey since 2019",
             ],
 
-            journeyTitle: "The Experimentation",
+            journeyTitle: "My Journey",
             journeyParagraph1:
-                "I've been my own lab rat. I've completed multiple Iceman workshops, pushed through extreme cold exposure protocols, and logged thousands of breathing sessions with HRV monitoring.",
+                "I've walked this path myself. I've done the Iceman workshops, the cold exposure, the thousands of breathing sessions. I know what it feels like to start from zero and see real change.",
             journeyParagraph2:
-                "I've tested everything: Wim Hof, Box Breathing, Tummo, Holotropic breathwork, cardiac coherence. I've read the studies—Huberman, Porges, Nestor. And I've measured the results on my own body.",
+                "I've explored Wim Hof, Box Breathing, Tummo, cardiac coherence. I've studied the research—Huberman, Porges, Nestor. And most importantly, I've experienced the transformation firsthand.",
             journeyParagraph3:
-                "The conclusion? The protocols work. But only when you track, adapt, and stay consistent. That's what Safe-Flow is designed to help you do.",
+                "What I learned: the methods work. But consistency is everything. That's why I built Safe-Flow—to help you stay on track and see your progress.",
 
-            scienceTitle: "The Science-First Approach",
+            scienceTitle: "Grounded in Science",
             scienceParagraph1:
-                "Every protocol in Safe-Flow is grounded in peer-reviewed research. We don't include techniques just because they're trending—we include them because the data supports their efficacy.",
+                "Every technique in Safe-Flow is backed by research. We don't chase trends—we include what's proven to work, so you can trust your practice.",
             scienceParagraph2:
-                "Heart Rate Variability (HRV) is our north star metric. It's the most reliable indicator of nervous system regulation, recovery capacity, and stress resilience. When your HRV improves, everything else follows.",
+                "Heart Rate Variability (HRV) is one way to see your progress objectively. It reflects how well your body handles stress and recovers. As your HRV improves, you'll feel the difference.",
 
-            visionTitle: "The Vision",
+            visionTitle: "Who This Is For",
             visionParagraph1:
-                "Safe-Flow is for people who want results, not rituals. Athletes optimizing recovery. Entrepreneurs managing stress. High-performers building resilience.",
+                "Safe-Flow is for anyone who wants to grow. Athletes looking for an edge. Professionals managing stress. Students building focus. Parents finding balance. Anyone committed to becoming their best self.",
             visionParagraph2:
-                "I want this to be the platform where you discover what actually works for your unique physiology—backed by your own data, not marketing claims.",
+                "I want this to be the place where you discover what works for you—through practice, not promises.",
             visionParagraph3:
-                "Your optimization is personal. The science is universal. Safe-Flow bridges the gap.",
+                "Your journey is unique. The science is here to guide you. Safe-Flow is here to support you.",
 
             closingQuote:
-                "The protocols work. But only when you track, adapt, and stay consistent.",
+                "The best version of yourself is built one breath at a time.",
             closingAuthor: "Axel, Founder of Safe-Flow",
             closingLocation: "Annecy, France",
         },
         fr: {
             heroTitle: "L'Histoire Derrière Safe-Flow",
-            heroSubtitle: "De l'expérimentation personnelle à l'optimisation basée sur la science",
+            heroSubtitle: "Un parcours personnel vers ma meilleure version—et vous aider à faire de même",
 
             introTitle: "Pourquoi J'ai Créé Ça",
             introParagraph1:
-                "J'ai créé Safe-Flow parce que j'en avais assez des applications bien-être qui promettaient la transformation sans substance. Je voulais un outil qui respecte la science, suit des métriques réelles, et délivre des résultats mesurables.",
+                "J'ai créé Safe-Flow parce que je crois que chacun mérite d'accéder aux outils qui peuvent vraiment changer sa vie. Pas de solutions miracles ou de promesses vides—mais des méthodes éprouvées qui vous aident à progresser, jour après jour.",
             introParagraph2:
-                "Il ne s'agit pas de vous vendre une méthode 'feel-good'. Il s'agit de vous donner des protocoles soutenus par la recherche et les outils de biofeedback pour prouver qu'ils fonctionnent pour vous.",
+                "Il ne s'agit pas de perfection. Il s'agit de progression. Il s'agit de construire une pratique qui s'adapte à votre vie et vous aide à devenir qui vous voulez être.",
 
-            credentialsTitle: "Ma Formation",
+            credentialsTitle: "Ma Pratique",
             credentialsList: [
-                "Instructeur certifié Méthode Wim Hof (Niveau 2)",
-                "Retraites Vipassana de 10 jours annuellement",
-                "60+ heures de pratique de respiration mensuelle",
-                "Suivi HRV personnel depuis 2019",
+                "Stages Méthode Wim Hof avec les instructeurs IceMind",
+                "Retraites Vipassana de 10 jours chaque année",
+                "60+ heures de pratique de respiration par mois",
+                "Je suis mon propre parcours depuis 2019",
             ],
 
-            journeyTitle: "L'Expérimentation",
+            journeyTitle: "Mon Parcours",
             journeyParagraph1:
-                "J'ai été mon propre cobaye. J'ai complété plusieurs stages Iceman, poussé à travers des protocoles d'exposition au froid extrême, et enregistré des milliers de sessions de respiration avec monitoring HRV.",
+                "J'ai parcouru ce chemin moi-même. J'ai fait les stages Iceman, l'exposition au froid, des milliers de sessions de respiration. Je sais ce que c'est de partir de zéro et de voir un vrai changement.",
             journeyParagraph2:
-                "J'ai tout testé : Wim Hof, Box Breathing, Tummo, respiration Holotropique, cohérence cardiaque. J'ai lu les études—Huberman, Porges, Nestor. Et j'ai mesuré les résultats sur mon propre corps.",
+                "J'ai exploré Wim Hof, Box Breathing, Tummo, cohérence cardiaque. J'ai étudié la recherche—Huberman, Porges, Nestor. Et surtout, j'ai vécu la transformation de première main.",
             journeyParagraph3:
-                "La conclusion ? Les protocoles fonctionnent. Mais seulement quand vous suivez, adaptez et restez constant. C'est ce que Safe-Flow est conçu pour vous aider à faire.",
+                "Ce que j'ai appris : les méthodes fonctionnent. Mais la constance est tout. C'est pourquoi j'ai créé Safe-Flow—pour vous aider à rester sur la bonne voie et voir vos progrès.",
 
-            scienceTitle: "L'Approche Science-First",
+            scienceTitle: "Ancré dans la Science",
             scienceParagraph1:
-                "Chaque protocole dans Safe-Flow est ancré dans la recherche peer-reviewed. Nous n'incluons pas des techniques juste parce qu'elles sont tendance—nous les incluons parce que les données soutiennent leur efficacité.",
+                "Chaque technique dans Safe-Flow est soutenue par la recherche. Nous ne suivons pas les tendances—nous incluons ce qui est prouvé, pour que vous puissiez faire confiance à votre pratique.",
             scienceParagraph2:
-                "La Variabilité de la Fréquence Cardiaque (HRV) est notre métrique de référence. C'est l'indicateur le plus fiable de la régulation du système nerveux, la capacité de récupération et la résilience au stress. Quand votre HRV s'améliore, tout le reste suit.",
+                "La Variabilité de la Fréquence Cardiaque (HRV) est un moyen de voir vos progrès objectivement. Elle reflète comment votre corps gère le stress et récupère. À mesure que votre HRV s'améliore, vous sentirez la différence.",
 
-            visionTitle: "La Vision",
+            visionTitle: "Pour Qui C'est Fait",
             visionParagraph1:
-                "Safe-Flow est pour ceux qui veulent des résultats, pas des rituels. Des athlètes optimisant leur récupération. Des entrepreneurs gérant leur stress. Des performers construisant leur résilience.",
+                "Safe-Flow est pour tous ceux qui veulent progresser. Des athlètes cherchant un avantage. Des professionnels gérant leur stress. Des étudiants construisant leur focus. Des parents trouvant l'équilibre. Tous ceux qui s'engagent à devenir leur meilleure version.",
             visionParagraph2:
-                "Je veux que ce soit la plateforme où vous découvrez ce qui fonctionne vraiment pour votre physiologie unique—soutenu par vos propres données, pas des arguments marketing.",
+                "Je veux que ce soit l'endroit où vous découvrez ce qui fonctionne pour vous—par la pratique, pas les promesses.",
             visionParagraph3:
-                "Votre optimisation est personnelle. La science est universelle. Safe-Flow fait le pont.",
+                "Votre parcours est unique. La science est là pour vous guider. Safe-Flow est là pour vous accompagner.",
 
             closingQuote:
-                "Les protocoles fonctionnent. Mais seulement quand vous suivez, adaptez et restez constant.",
+                "La meilleure version de vous-même se construit une respiration à la fois.",
             closingAuthor: "Axel, Fondateur de Safe-Flow",
             closingLocation: "Annecy, France",
         },

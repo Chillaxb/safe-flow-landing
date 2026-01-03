@@ -2,20 +2,21 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 
 const colors = {
-    primary: "#6366f1",
-    primaryLight: "#818cf8",
-    primaryDark: "#4f46e5",
-    secondary: "#10b981",
-    secondaryLight: "#34d399",
+    primary: "#8B5CF6",        // Electric violet
+    primaryLight: "#A78BFA",
+    primaryDark: "#7C3AED",
+    secondary: "#06B6D4",      // Vivid cyan
+    secondaryLight: "#22D3EE",
+    accent: "#22D3EE",         // Luminous cyan
     background: "#f9fafb",
+    dark: "#0F0F1A",           // Purple-black
     white: "#ffffff",
-    textDark: "#111827",
-    textMuted: "#6b7280",
-    textLight: "#9ca3af",
-    border: "#e5e7eb",
+    textDark: "#0F0F1A",
+    textMuted: "#64748b",
+    textLight: "#94a3b8",
+    border: "#1e293b",
 }
 
 // ============================================
@@ -30,7 +31,7 @@ const BreathingSLogo = ({ breathScale }: { breathScale: number }) => {
             height="140"
             viewBox="0 0 100 100"
             style={{
-                filter: `drop-shadow(0 0 ${breathScale === 1 ? 15 : 25}px rgba(99, 102, 241, ${glowIntensity}))`,
+                filter: `drop-shadow(0 0 ${breathScale === 1 ? 15 : 25}px rgba(139, 92, 246, ${glowIntensity}))`,
                 transition: "filter 4s ease-in-out",
             }}
         >
@@ -164,12 +165,17 @@ const AICoachIcon = () => (
 )
 
 export default function HomePage() {
-    const pathname = usePathname()
     const [breathScale, setBreathScale] = useState(1)
     const [hoveredButton, setHoveredButton] = useState<string | null>(null)
     const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+    const [language, setLanguage] = useState<"en" | "fr">("en")
 
-    const language = pathname?.startsWith("/fr") ? "fr" : "en"
+    useEffect(() => {
+        const savedLang = localStorage.getItem("safe-flow-lang") as "en" | "fr" | null
+        if (savedLang) {
+            setLanguage(savedLang)
+        }
+    }, [])
 
     useEffect(() => {
         const breathe = () => setBreathScale((prev) => (prev === 1 ? 1.15 : 1))
@@ -179,58 +185,58 @@ export default function HomePage() {
 
     const content = {
         en: {
-            heroTitle1: "Unlock Your",
-            heroTitle2: "Peak Performance",
-            heroSubtitle: "Science-backed breathing protocols, HRV tracking, and AI coaching to optimize your mind and body.",
-            heroTag: "For athletes, entrepreneurs & high-performers",
-            ctaButton: "Start optimizing",
-            learnMore: "See the science",
+            heroTitle1: "Become Your",
+            heroTitle2: "Best Self",
+            heroSubtitle: "Science-backed breathing protocols and personalized coaching to help you grow, perform, and thrive—on your own terms.",
+            heroTag: "For athletes, competitors & anyone who wants to grow",
+            ctaButton: "Start your journey",
+            learnMore: "How it works",
 
-            card1Title: "Science-Based Protocols",
-            card1Text: "Wim Hof, Box Breathing, Cardiac Coherence—validated methods from peer-reviewed research, not trends.",
-            card2Title: "Real-Time Biofeedback",
-            card2Text: "Track HRV, recovery scores, and stress levels. Connect Garmin, Apple Watch, Oura for data-driven insights.",
-            card3Title: "AI That Adapts to YOU",
-            card3Text: "Your personal coach analyzes your patterns and creates protocols optimized for your unique physiology.",
+            card1Title: "Proven Methods",
+            card1Text: "Wim Hof, Box Breathing, Cardiac Coherence—techniques used by elite athletes and validated by science.",
+            card2Title: "Track Your Progress",
+            card2Text: "Connect your wearables to see real improvements in HRV, recovery, and stress resilience over time.",
+            card3Title: "Personalized Guidance",
+            card3Text: "An AI coach that learns your rhythms and helps you build sustainable habits for lasting growth.",
 
-            statsTitle: "Built on Science",
+            statsTitle: "Results That Matter",
             stat1: "68%",
-            stat1Label: "stress reduction with coherent breathing",
+            stat1Label: "feel calmer and more focused",
             stat2: "23%",
             stat2Label: "HRV improvement in 21 days",
             stat3: "4min",
-            stat3Label: "to shift your nervous system state",
+            stat3Label: "to shift your state of mind",
 
-            ctaTitle: "Ready to optimize?",
-            ctaSubtitle: "Join thousands of high-performers who've unlocked their potential with science-backed protocols.",
+            ctaTitle: "Ready to grow?",
+            ctaSubtitle: "Join a community of people committed to becoming their best selves through consistent practice.",
 
             integrations: "Integrates with",
         },
         fr: {
-            heroTitle1: "Libérez Votre",
-            heroTitle2: "Plein Potentiel",
-            heroSubtitle: "Protocoles respiratoires validés par la science, suivi HRV et coaching IA pour optimiser corps et esprit.",
-            heroTag: "Pour athlètes, entrepreneurs & high-performers",
-            ctaButton: "Commencer l'optimisation",
-            learnMore: "Voir la science",
+            heroTitle1: "Devenez Votre",
+            heroTitle2: "Meilleure Version",
+            heroSubtitle: "Protocoles respiratoires validés par la science et coaching personnalisé pour progresser, performer et s'épanouir—à votre rythme.",
+            heroTag: "Pour sportifs, compétiteurs & ceux qui veulent progresser",
+            ctaButton: "Commencer le voyage",
+            learnMore: "Comment ça marche",
 
-            card1Title: "Protocoles Scientifiques",
-            card1Text: "Wim Hof, Box Breathing, Cohérence Cardiaque—des méthodes validées par la recherche, pas des tendances.",
-            card2Title: "Biofeedback Temps Réel",
-            card2Text: "Suivez HRV, scores de récupération et niveaux de stress. Connectez Garmin, Apple Watch, Oura.",
-            card3Title: "IA Qui S'Adapte à VOUS",
-            card3Text: "Votre coach personnel analyse vos patterns et crée des protocoles optimisés pour votre physiologie unique.",
+            card1Title: "Méthodes Éprouvées",
+            card1Text: "Wim Hof, Box Breathing, Cohérence Cardiaque—des techniques utilisées par les athlètes d'élite et validées par la science.",
+            card2Title: "Suivez Vos Progrès",
+            card2Text: "Connectez vos wearables pour voir vos améliorations réelles en HRV, récupération et résilience au stress.",
+            card3Title: "Accompagnement Personnalisé",
+            card3Text: "Un coach IA qui apprend vos rythmes et vous aide à construire des habitudes durables pour une croissance durable.",
 
-            statsTitle: "Fondé sur la Science",
+            statsTitle: "Des Résultats Concrets",
             stat1: "68%",
-            stat1Label: "réduction du stress avec respiration cohérente",
+            stat1Label: "se sentent plus calmes et concentrés",
             stat2: "23%",
             stat2Label: "amélioration HRV en 21 jours",
             stat3: "4min",
-            stat3Label: "pour changer l'état du système nerveux",
+            stat3Label: "pour changer votre état d'esprit",
 
-            ctaTitle: "Prêt à optimiser ?",
-            ctaSubtitle: "Rejoignez des milliers de high-performers qui ont libéré leur potentiel avec des protocoles scientifiques.",
+            ctaTitle: "Prêt à progresser ?",
+            ctaSubtitle: "Rejoignez une communauté de personnes engagées à devenir leur meilleure version grâce à une pratique régulière.",
 
             integrations: "S'intègre avec",
         },
@@ -246,8 +252,8 @@ export default function HomePage() {
 
     const getGlowIntensity = () => {
         return breathScale === 1
-            ? `0 0 40px rgba(99, 102, 241, 0.2), 0 0 80px rgba(99, 102, 241, 0.1)`
-            : `0 0 60px rgba(99, 102, 241, 0.4), 0 0 120px rgba(99, 102, 241, 0.2), 0 0 180px rgba(16, 185, 129, 0.15)`
+            ? `0 0 40px rgba(139, 92, 246, 0.2), 0 0 80px rgba(139, 92, 246, 0.1)`
+            : `0 0 60px rgba(139, 92, 246, 0.4), 0 0 120px rgba(139, 92, 246, 0.2), 0 0 180px rgba(6, 182, 212, 0.15)`
     }
 
     return (

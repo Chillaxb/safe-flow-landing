@@ -1,17 +1,25 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 
 export default function HowItWorksPage() {
-    const pathname = usePathname()
-    const language = pathname?.startsWith("/fr") ? "fr" : "en"
+    const [language, setLanguage] = useState<"en" | "fr">("en")
+
+    useEffect(() => {
+        const savedLang = localStorage.getItem("safe-flow-lang") as "en" | "fr" | null
+        if (savedLang) {
+            setLanguage(savedLang)
+        }
+    }, [])
 
     const colors = {
-        primary: "#6366f1",
-        secondary: "#22c55e",
-        accent: "#f59e0b",
-        dark: "#0f172a",
+        primary: "#8B5CF6",        // Electric violet
+        primaryLight: "#A78BFA",
+        secondary: "#06B6D4",      // Vivid cyan
+        secondaryLight: "#22D3EE",
+        accent: "#22D3EE",         // Luminous cyan
+        dark: "#0F0F1A",           // Purple-black
         text: "#334155",
         textLight: "#64748b",
         bg: "#f8fafc",
@@ -19,88 +27,88 @@ export default function HowItWorksPage() {
 
     const content = {
         en: {
-            heroTitle: "The Science of Optimization",
-            heroSubtitle: "A data-driven approach to unlock your peak performance through validated protocols and real-time biofeedback",
-            step1Title: "Assess Your Baseline",
+            heroTitle: "Your Path to Growth",
+            heroSubtitle: "A simple, science-backed approach to becoming your best self—one breath at a time",
+            step1Title: "Understand Where You Are",
             step1Points: [
-                "Quick HRV and stress assessment to understand your current state",
-                "Identify your chronotype and optimal performance windows",
-                "Establish benchmarks for nervous system regulation",
+                "Quick assessment to understand your current stress and energy levels",
+                "Discover your natural rhythms and best times for practice",
+                "Get a clear starting point to measure your progress",
             ],
-            step2Title: "Get Science-Backed Protocols",
+            step2Title: "Learn Proven Techniques",
             step2Points: [
-                "Wim Hof, Box Breathing, Cardiac Coherence—peer-reviewed methods",
-                "Protocols tailored to your goals: performance, recovery, or focus",
-                "Progressive difficulty based on your physiological adaptation",
+                "Wim Hof, Box Breathing, Cardiac Coherence—methods used by elite athletes",
+                "Choose what fits your goals: energy, calm, focus, or recovery",
+                "Progress at your own pace with guided sessions",
             ],
-            step3Title: "Connect Your Biometrics",
+            step3Title: "Connect Your Devices",
             step3Points: [
-                "Sync Garmin, Apple Watch, Oura, Whoop for complete data picture",
-                "Real-time HRV tracking during breathwork sessions",
-                "Automatic sleep, recovery, and strain analysis",
+                "Sync Garmin, Apple Watch, Oura, Whoop to track your journey",
+                "See how your body responds during each session",
+                "Optional but powerful—your data tells your story",
             ],
-            step4Title: "Track Physiological Changes",
+            step4Title: "Watch Yourself Grow",
             step4Points: [
-                "Watch your HRV baseline improve over weeks",
-                "See stress response patterns and recovery metrics",
-                "Data-driven proof that the protocols are working",
+                "See real improvements in how you handle stress",
+                "Track your progress week by week",
+                "Celebrate the small wins that lead to big changes",
             ],
-            step5Title: "Optimize With AI Coaching",
+            step5Title: "Get Personalized Guidance",
             step5Points: [
-                "AI analyzes your biometrics to adjust protocol intensity",
-                "Recommendations based on sleep quality, strain, and readiness",
-                "Continuous optimization—your training evolves with you",
+                "An AI coach that adapts to your lifestyle and goals",
+                "Suggestions based on how you slept, how you feel, what you need",
+                "Your practice evolves as you do",
             ],
-            step6Title: "Access Research & Community",
+            step6Title: "Join a Community",
             step6Points: [
-                "Deep dives into the science: Huberman, peer-reviewed studies",
-                "Connect with athletes and high-performers using the same methods",
-                "Local breathwork workshops and ice bath experiences",
+                "Learn from research and experts like Huberman",
+                "Connect with others on the same journey",
+                "Discover local workshops and experiences",
             ],
-            ctaTitle: "Ready to Optimize?",
-            ctaButton: "Start Your Assessment",
+            ctaTitle: "Ready to Start?",
+            ctaButton: "Begin Your Journey",
         },
         fr: {
-            heroTitle: "La Science de l'Optimisation",
-            heroSubtitle: "Une approche basée sur les données pour libérer votre performance maximale grâce à des protocoles validés et du biofeedback en temps réel",
-            step1Title: "Évaluez Votre Niveau de Base",
+            heroTitle: "Votre Chemin vers la Croissance",
+            heroSubtitle: "Une approche simple et validée par la science pour devenir votre meilleure version—une respiration à la fois",
+            step1Title: "Comprenez Où Vous Êtes",
             step1Points: [
-                "Évaluation rapide HRV et stress pour comprendre votre état actuel",
-                "Identifiez votre chronotype et vos fenêtres de performance optimales",
-                "Établissez des repères pour la régulation du système nerveux",
+                "Évaluation rapide pour comprendre vos niveaux de stress et d'énergie",
+                "Découvrez vos rythmes naturels et vos meilleurs moments pour pratiquer",
+                "Obtenez un point de départ clair pour mesurer vos progrès",
             ],
-            step2Title: "Obtenez des Protocoles Scientifiques",
+            step2Title: "Apprenez des Techniques Éprouvées",
             step2Points: [
-                "Wim Hof, Box Breathing, Cohérence Cardiaque—méthodes validées par la recherche",
-                "Protocoles adaptés à vos objectifs : performance, récupération ou focus",
-                "Difficulté progressive selon votre adaptation physiologique",
+                "Wim Hof, Box Breathing, Cohérence Cardiaque—méthodes utilisées par les athlètes d'élite",
+                "Choisissez selon vos objectifs : énergie, calme, focus ou récupération",
+                "Progressez à votre rythme avec des sessions guidées",
             ],
-            step3Title: "Connectez Vos Données Biométriques",
+            step3Title: "Connectez Vos Appareils",
             step3Points: [
-                "Synchronisez Garmin, Apple Watch, Oura, Whoop pour une vue complète",
-                "Suivi HRV en temps réel pendant les sessions de respiration",
-                "Analyse automatique du sommeil, récupération et effort",
+                "Synchronisez Garmin, Apple Watch, Oura, Whoop pour suivre votre parcours",
+                "Voyez comment votre corps réagit pendant chaque session",
+                "Optionnel mais puissant—vos données racontent votre histoire",
             ],
-            step4Title: "Suivez les Changements Physiologiques",
+            step4Title: "Observez Votre Évolution",
             step4Points: [
-                "Observez votre HRV de base s'améliorer au fil des semaines",
-                "Visualisez vos patterns de réponse au stress et métriques de récupération",
-                "Preuve par les données que les protocoles fonctionnent",
+                "Constatez de vraies améliorations dans votre gestion du stress",
+                "Suivez vos progrès semaine après semaine",
+                "Célébrez les petites victoires qui mènent aux grands changements",
             ],
-            step5Title: "Optimisez avec le Coaching IA",
+            step5Title: "Bénéficiez d'un Accompagnement Personnalisé",
             step5Points: [
-                "L'IA analyse vos données biométriques pour ajuster l'intensité",
-                "Recommandations basées sur qualité du sommeil, effort et préparation",
-                "Optimisation continue—votre entraînement évolue avec vous",
+                "Un coach IA qui s'adapte à votre style de vie et vos objectifs",
+                "Suggestions basées sur votre sommeil, votre ressenti, vos besoins",
+                "Votre pratique évolue avec vous",
             ],
-            step6Title: "Accédez à la Recherche & Communauté",
+            step6Title: "Rejoignez une Communauté",
             step6Points: [
-                "Plongées dans la science : Huberman, études peer-reviewed",
-                "Connectez avec des athlètes et performers utilisant les mêmes méthodes",
-                "Ateliers de respiration locaux et expériences bains glacés",
+                "Apprenez de la recherche et d'experts comme Huberman",
+                "Connectez avec d'autres personnes sur le même chemin",
+                "Découvrez des ateliers et expériences locales",
             ],
-            ctaTitle: "Prêt à Optimiser ?",
-            ctaButton: "Commencer l'Évaluation",
+            ctaTitle: "Prêt à Commencer ?",
+            ctaButton: "Démarrer Votre Parcours",
         },
     }
 

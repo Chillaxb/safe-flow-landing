@@ -1,18 +1,30 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 
 export default function Footer() {
-    const pathname = usePathname()
     const [hoveredLink, setHoveredLink] = useState<string | null>(null)
+    const [language, setLanguage] = useState<"en" | "fr">("en")
 
-    const language = pathname?.startsWith("/fr") ? "fr" : "en"
+    useEffect(() => {
+        const savedLang = localStorage.getItem("safe-flow-lang") as "en" | "fr" | null
+        if (savedLang) {
+            setLanguage(savedLang)
+        }
+    }, [])
+
+    const colors = {
+        primary: "#8B5CF6",        // Electric violet
+        primaryLight: "#A78BFA",
+        secondary: "#06B6D4",      // Vivid cyan
+        secondaryLight: "#22D3EE",
+        dark: "#0F0F1A",           // Purple-black
+    }
 
     const content = {
         en: {
-            tagline: "AI-guided breath and emotional regulation. Personalized for your rhythm, protected by design.",
+            tagline: "Breathwork and coaching to help you become your best self. Science-backed. Personalized. Private by design.",
             productTitle: "Product",
             howItWorks: "How it Works",
             companyTitle: "Company",
@@ -27,7 +39,7 @@ export default function Footer() {
             taglineBottom: "Your data, your privacy, your journey.",
         },
         fr: {
-            tagline: "Régulation de la respiration et des émotions guidée par l'IA. Personnalisée pour votre rythme, protégée par conception.",
+            tagline: "Respiration et coaching pour devenir votre meilleure version. Basé sur la science. Personnalisé. Privé par conception.",
             productTitle: "Produit",
             howItWorks: "Comment ça Marche",
             companyTitle: "Entreprise",
@@ -45,12 +57,8 @@ export default function Footer() {
 
     const t = content[language]
 
-    const getLocalizedUrl = (url: string) => {
-        return language === "fr" ? `/fr${url}` : url
-    }
-
     const linkStyle = (isHovered: boolean) => ({
-        color: isHovered ? "#e0f2fe" : "#94a3b8",
+        color: isHovered ? colors.secondaryLight : "#94a3b8",
         textDecoration: "none",
         fontSize: "15px",
         transition: "color 0.2s",
@@ -85,7 +93,7 @@ export default function Footer() {
     ]
 
     return (
-        <footer style={{ background: "#0f172a", color: "#94a3b8", padding: "60px 48px 24px", width: "100%" }}>
+        <footer style={{ background: colors.dark, color: "#94a3b8", padding: "60px 48px 24px", width: "100%" }}>
             <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
                     {/* Brand */}
@@ -93,7 +101,7 @@ export default function Footer() {
                         <div style={{ marginBottom: "16px", display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "6px" }}>
                             <span style={{ fontSize: "20px", fontWeight: 600 }}>
                                 <span style={{ color: "#e0f2fe" }}>Safe</span>
-                                <span style={{ background: "linear-gradient(135deg, #667EEA, #764BA2, #F093FB)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Flow</span>
+                                <span style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Flow</span>
                             </span>
                         </div>
                         <p style={{ fontSize: "15px", lineHeight: 1.7, marginBottom: "16px", color: "#94a3b8", maxWidth: "400px" }}>
@@ -108,40 +116,40 @@ export default function Footer() {
 
                     {/* Product */}
                     <div>
-                        <h3 style={{ color: "#e0f2fe", fontSize: "17px", fontWeight: 600, marginBottom: "20px" }}>{t.productTitle}</h3>
-                        <Link href={getLocalizedUrl("/how-it-works")} style={linkStyle(hoveredLink === "how")} onMouseEnter={() => setHoveredLink("how")} onMouseLeave={() => setHoveredLink(null)}>
+                        <h3 style={{ color: colors.secondaryLight, fontSize: "17px", fontWeight: 600, marginBottom: "20px" }}>{t.productTitle}</h3>
+                        <Link href="/how-it-works" style={linkStyle(hoveredLink === "how")} onMouseEnter={() => setHoveredLink("how")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.howItWorks}
                         </Link>
                     </div>
 
                     {/* Company */}
                     <div>
-                        <h3 style={{ color: "#e0f2fe", fontSize: "17px", fontWeight: 600, marginBottom: "20px" }}>{t.companyTitle}</h3>
-                        <Link href={getLocalizedUrl("/about")} style={linkStyle(hoveredLink === "about")} onMouseEnter={() => setHoveredLink("about")} onMouseLeave={() => setHoveredLink(null)}>
+                        <h3 style={{ color: colors.secondaryLight, fontSize: "17px", fontWeight: 600, marginBottom: "20px" }}>{t.companyTitle}</h3>
+                        <Link href="/about" style={linkStyle(hoveredLink === "about")} onMouseEnter={() => setHoveredLink("about")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.aboutUs}
                         </Link>
-                        <Link href={getLocalizedUrl("/contact")} style={linkStyle(hoveredLink === "contact")} onMouseEnter={() => setHoveredLink("contact")} onMouseLeave={() => setHoveredLink(null)}>
+                        <Link href="/contact" style={linkStyle(hoveredLink === "contact")} onMouseEnter={() => setHoveredLink("contact")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.contact}
                         </Link>
                     </div>
 
                     {/* Legal */}
                     <div>
-                        <h3 style={{ color: "#e0f2fe", fontSize: "17px", fontWeight: 600, marginBottom: "20px" }}>{t.legalTitle}</h3>
-                        <Link href={getLocalizedUrl("/privacy")} style={linkStyle(hoveredLink === "privacy")} onMouseEnter={() => setHoveredLink("privacy")} onMouseLeave={() => setHoveredLink(null)}>
+                        <h3 style={{ color: colors.secondaryLight, fontSize: "17px", fontWeight: 600, marginBottom: "20px" }}>{t.legalTitle}</h3>
+                        <Link href="/privacy" style={linkStyle(hoveredLink === "privacy")} onMouseEnter={() => setHoveredLink("privacy")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.privacy}
                         </Link>
-                        <Link href={getLocalizedUrl("/terms")} style={linkStyle(hoveredLink === "terms")} onMouseEnter={() => setHoveredLink("terms")} onMouseLeave={() => setHoveredLink(null)}>
+                        <Link href="/terms" style={linkStyle(hoveredLink === "terms")} onMouseEnter={() => setHoveredLink("terms")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.terms}
                         </Link>
-                        <Link href={getLocalizedUrl("/cookies")} style={linkStyle(hoveredLink === "cookies")} onMouseEnter={() => setHoveredLink("cookies")} onMouseLeave={() => setHoveredLink(null)}>
+                        <Link href="/cookies" style={linkStyle(hoveredLink === "cookies")} onMouseEnter={() => setHoveredLink("cookies")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.cookies}
                         </Link>
                     </div>
                 </div>
 
                 {/* Social Links */}
-                <div style={{ borderTop: "1px solid #1e293b", paddingTop: "32px", marginBottom: "32px", display: "flex", justifyContent: "center", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
+                <div style={{ borderTop: `1px solid ${colors.primary}33`, paddingTop: "32px", marginBottom: "32px", display: "flex", justifyContent: "center", alignItems: "center", gap: "32px", flexWrap: "wrap" }}>
                     {socialLinks.map((social) => (
                         <a
                             key={social.name}
@@ -150,7 +158,7 @@ export default function Footer() {
                             rel="noopener noreferrer"
                             aria-label={social.ariaLabel}
                             style={{
-                                color: hoveredLink === social.name ? "#60a5fa" : "#94a3b8",
+                                color: hoveredLink === social.name ? colors.primary : "#94a3b8",
                                 transition: "color 0.2s, opacity 0.2s",
                                 textDecoration: "none",
                                 display: "flex",
@@ -167,9 +175,9 @@ export default function Footer() {
                 </div>
 
                 {/* Copyright */}
-                <div style={{ borderTop: "1px solid #1e293b", paddingTop: "24px", textAlign: "center", fontSize: "14px", color: "#64748b" }}>
+                <div style={{ borderTop: `1px solid ${colors.primary}33`, paddingTop: "24px", textAlign: "center", fontSize: "14px", color: "#64748b" }}>
                     <p style={{ margin: "6px 0" }}>© {new Date().getFullYear()} {t.copyright}</p>
-                    <p style={{ margin: "6px 0", fontStyle: "italic", color: "#94a3b8" }}>{t.taglineBottom}</p>
+                    <p style={{ margin: "6px 0", fontStyle: "italic", color: colors.secondaryLight }}>{t.taglineBottom}</p>
                 </div>
             </div>
         </footer>

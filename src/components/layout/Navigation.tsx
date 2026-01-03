@@ -5,10 +5,10 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const colors = {
-    primary: "#6366f1",
-    primaryLight: "#818cf8",
-    secondary: "#10b981",
-    secondaryLight: "#34d399",
+    primary: "#8B5CF6",        // Electric violet
+    primaryLight: "#A78BFA",
+    secondary: "#06B6D4",      // Vivid cyan
+    secondaryLight: "#22D3EE",
 }
 
 const BreathingSLogo = ({ size = 40 }: { size?: number }) => {
@@ -39,7 +39,7 @@ const BreathingSLogo = ({ size = 40 }: { size?: number }) => {
                 height={size}
                 viewBox="0 0 100 100"
                 style={{
-                    filter: `drop-shadow(0 0 ${breathScale === 1 ? 8 : 12}px rgba(99, 102, 241, ${glowIntensity}))`,
+                    filter: `drop-shadow(0 0 ${breathScale === 1 ? 8 : 12}px rgba(139, 92, 246, ${glowIntensity}))`,
                     transition: "filter 4s ease-in-out",
                 }}
             >
@@ -138,22 +138,24 @@ interface NavigationProps {
 export default function Navigation({ isSticky = true }: NavigationProps) {
     const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [language, setLanguage] = useState<"en" | "fr">("en")
 
-    const language = pathname?.startsWith("/fr") ? "fr" : "en"
+    useEffect(() => {
+        const savedLang = localStorage.getItem("safe-flow-lang") as "en" | "fr" | null
+        if (savedLang) {
+            setLanguage(savedLang)
+        }
+    }, [])
 
     const getLocalizedUrl = (url: string) => {
-        return language === "fr" ? `/fr${url}` : url
+        return url // Keep URLs simple, no /fr prefix
     }
 
     const switchLanguage = () => {
         const newLanguage = language === "en" ? "fr" : "en"
-        if (typeof window !== "undefined") {
-            if (newLanguage === "fr" && !pathname?.startsWith("/fr")) {
-                window.location.href = `/fr${pathname}`
-            } else if (newLanguage === "en" && pathname?.startsWith("/fr")) {
-                window.location.href = pathname?.replace("/fr", "") || "/"
-            }
-        }
+        localStorage.setItem("safe-flow-lang", newLanguage)
+        setLanguage(newLanguage)
+        window.location.reload() // Reload to update all components
     }
 
     const content = {
@@ -235,7 +237,7 @@ export default function Navigation({ isSticky = true }: NavigationProps) {
                                     textDecoration: "none",
                                     fontSize: "14px",
                                     fontWeight: 600,
-                                    color: pathname === getLocalizedUrl(link.href) ? "#6366f1" : "#475569",
+                                    color: pathname === getLocalizedUrl(link.href) ? "#8B5CF6" : "#475569",
                                     background: pathname === getLocalizedUrl(link.href) ? "#f0f9ff" : "transparent",
                                     transition: "all 0.2s ease",
                                 }}

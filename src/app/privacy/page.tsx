@@ -1,10 +1,16 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { useState, useEffect } from "react"
 
 export default function PrivacyPage() {
-    const pathname = usePathname()
-    const language = pathname?.startsWith("/fr") ? "fr" : "en"
+    const [language, setLanguage] = useState<"en" | "fr">("en")
+
+    useEffect(() => {
+        const savedLang = localStorage.getItem("safe-flow-lang") as "en" | "fr" | null
+        if (savedLang) {
+            setLanguage(savedLang)
+        }
+    }, [])
 
     const content = {
         en: {
