@@ -80,44 +80,94 @@ export default function CookiesPage() {
     const t = content[language]
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-            <section className="pt-32 pb-20 px-6 md:px-12 lg:px-20">
-                <div className="max-w-4xl mx-auto">
-                    {/* Header */}
-                    <div className="text-center mb-16">
-                        <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">{t.title}</h1>
-                        <p className="text-gray-500">{t.lastUpdated}</p>
-                    </div>
+        <div
+            style={{
+                minHeight: "100vh",
+                background: "linear-gradient(to bottom, #f9fafb, #ffffff)",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%"
+            }}
+        >
+            <div
+                style={{
+                    width: "100%",
+                    maxWidth: "896px",
+                    padding: "128px 24px 80px 24px",
+                }}
+            >
+                {/* Header */}
+                <div style={{ textAlign: "center", marginBottom: "64px" }}>
+                    <h1 style={{
+                        fontSize: "clamp(2rem, 5vw, 3rem)",
+                        fontWeight: 300,
+                        color: "#111827",
+                        marginBottom: "16px"
+                    }}>
+                        {t.title}
+                    </h1>
+                    <p style={{ color: "#6b7280" }}>{t.lastUpdated}</p>
+                </div>
 
-                    {/* Intro Card */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
-                        <p className="text-lg text-gray-600 leading-relaxed">{t.intro}</p>
-                    </div>
+                {/* Intro Card */}
+                <div style={{
+                    background: "#ffffff",
+                    borderRadius: "16px",
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                    border: "1px solid #f3f4f6",
+                    padding: "32px",
+                    marginBottom: "32px"
+                }}>
+                    <p style={{ fontSize: "18px", color: "#4b5563", lineHeight: 1.7 }}>{t.intro}</p>
+                </div>
 
-                    {/* Sections */}
-                    <div className="space-y-6">
-                        {t.sections.map((section, index) => (
-                            <div
-                                key={index}
-                                className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 transition-all duration-300 hover:shadow-md hover:border-violet-100"
-                            >
-                                <div className="flex items-start gap-4">
-                                    <div
-                                        className="flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center text-white font-medium"
-                                        style={{ background: "linear-gradient(135deg, #8B5CF6, #06B6D4)" }}
-                                    >
-                                        {index + 1}
-                                    </div>
-                                    <div>
-                                        <h2 className="text-xl font-semibold text-gray-900 mb-3">{section.title}</h2>
-                                        <p className="text-gray-600 leading-relaxed">{section.content}</p>
-                                    </div>
+                {/* Sections */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                    {t.sections.map((section, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                background: "#ffffff",
+                                borderRadius: "16px",
+                                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+                                border: "1px solid #f3f4f6",
+                                padding: "32px",
+                                transition: "all 0.3s ease"
+                            }}
+                        >
+                            <div style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}>
+                                <div
+                                    style={{
+                                        flexShrink: 0,
+                                        width: "40px",
+                                        height: "40px",
+                                        borderRadius: "12px",
+                                        background: "linear-gradient(135deg, #8B5CF6, #06B6D4)",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        color: "#ffffff",
+                                        fontWeight: 500
+                                    }}
+                                >
+                                    {index + 1}
+                                </div>
+                                <div>
+                                    <h2 style={{
+                                        fontSize: "20px",
+                                        fontWeight: 600,
+                                        color: "#111827",
+                                        marginBottom: "12px"
+                                    }}>
+                                        {section.title}
+                                    </h2>
+                                    <p style={{ color: "#4b5563", lineHeight: 1.7 }}>{section.content}</p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </section>
+            </div>
         </div>
     )
 }
