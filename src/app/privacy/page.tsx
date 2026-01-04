@@ -15,7 +15,7 @@ export default function PrivacyPage() {
     const content = {
         en: {
             title: "Privacy Policy",
-            lastUpdated: "Last updated: December 2024",
+            lastUpdated: "Last updated: December 2025",
             intro: "At Safe-Flow, your privacy is our priority. This policy explains how we collect, use, and protect your personal information.",
             sections: [
                 {
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
         },
         fr: {
             title: "Politique de Confidentialité",
-            lastUpdated: "Dernière mise à jour : Décembre 2024",
+            lastUpdated: "Dernière mise à jour : Décembre 2025",
             intro: "Chez Safe-Flow, votre vie privée est notre priorité. Cette politique explique comment nous collectons, utilisons et protégeons vos informations personnelles.",
             sections: [
                 {

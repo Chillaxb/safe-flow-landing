@@ -15,7 +15,7 @@ export default function CookiesPage() {
     const content = {
         en: {
             title: "Cookie Policy",
-            lastUpdated: "Last updated: December 2024",
+            lastUpdated: "Last updated: December 2025",
             intro: "This policy explains how Safe-Flow uses cookies and similar technologies.",
             sections: [
                 {
@@ -46,7 +46,7 @@ export default function CookiesPage() {
         },
         fr: {
             title: "Politique des Cookies",
-            lastUpdated: "Dernière mise à jour : Décembre 2024",
+            lastUpdated: "Dernière mise à jour : Décembre 2025",
             intro: "Cette politique explique comment Safe-Flow utilise les cookies et technologies similaires.",
             sections: [
                 {

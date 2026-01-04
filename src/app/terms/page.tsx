@@ -15,7 +15,7 @@ export default function TermsPage() {
     const content = {
         en: {
             title: "Terms of Service",
-            lastUpdated: "Last updated: December 2024",
+            lastUpdated: "Last updated: December 2025",
             intro: "Welcome to Safe-Flow. By using our services, you agree to these terms.",
             sections: [
                 {
@@ -50,7 +50,7 @@ export default function TermsPage() {
         },
         fr: {
             title: "Conditions d'Utilisation",
-            lastUpdated: "Dernière mise à jour : Décembre 2024",
+            lastUpdated: "Dernière mise à jour : Décembre 2025",
             intro: "Bienvenue sur Safe-Flow. En utilisant nos services, vous acceptez ces conditions.",
             sections: [
                 {
