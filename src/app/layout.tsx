@@ -31,6 +31,9 @@ export const metadata: Metadata = {
         index: true,
         follow: true,
     },
+    other: {
+        "apple-itunes-app": "app-id=6755822625",
+    },
 }
 
 export default function RootLayout({

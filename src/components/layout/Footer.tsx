@@ -22,11 +22,14 @@ export default function Footer() {
         dark: "#0F0F1A",           // Purple-black
     }
 
+    const APP_STORE_URL = "https://apps.apple.com/app/safeflow-ai-breathwork-coach/id6755822625"
+
     const content = {
         en: {
             tagline: "Breathwork and coaching to help you become your best self. Science-backed. Personalized. Private by design.",
             productTitle: "Product",
             howItWorks: "How it Works",
+            downloadApp: "Download App",
             companyTitle: "Company",
             aboutUs: "About Us",
             blog: "Blog",
@@ -37,11 +40,13 @@ export default function Footer() {
             cookies: "Cookie Policy",
             copyright: "Safe-Flow.ai - A-X Software SASU. All rights reserved.",
             taglineBottom: "Your data, your privacy, your journey.",
+            availableOn: "Available on",
         },
         fr: {
             tagline: "Respiration et coaching pour devenir votre meilleure version. Basé sur la science. Personnalisé. Privé par conception.",
             productTitle: "Produit",
             howItWorks: "Comment ça Marche",
+            downloadApp: "Télécharger",
             companyTitle: "Entreprise",
             aboutUs: "À Propos",
             blog: "Blog",
@@ -52,6 +57,7 @@ export default function Footer() {
             cookies: "Politique des Cookies",
             copyright: "Safe-Flow.ai - A-X Software SASU. Tous droits réservés.",
             taglineBottom: "Vos données, votre vie privée, votre parcours.",
+            availableOn: "Disponible sur",
         },
     }
 
@@ -107,6 +113,26 @@ export default function Footer() {
                         <p style={{ fontSize: "15px", lineHeight: 1.7, marginBottom: "16px", color: "#94a3b8", maxWidth: "400px" }}>
                             {t.tagline}
                         </p>
+
+                        {/* App Store Badge */}
+                        <div style={{ marginBottom: "20px" }}>
+                            <p style={{ fontSize: "12px", color: "#64748b", marginBottom: "8px", textTransform: "uppercase", letterSpacing: "0.5px" }}>{t.availableOn}</p>
+                            <a
+                                href={APP_STORE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ display: "inline-block", transition: "opacity 0.2s" }}
+                                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+                                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                            >
+                                <img
+                                    src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83"
+                                    alt="Download on the App Store"
+                                    style={{ height: "40px", width: "auto" }}
+                                />
+                            </a>
+                        </div>
+
                         <div style={{ fontSize: "14px", lineHeight: 1.8, color: "#64748b" }}>
                             <p style={{ margin: "4px 0" }}><strong style={{ color: "#94a3b8" }}>A-X Software SASU</strong></p>
                             <p style={{ margin: "4px 0" }}>122 Rue Amelot</p>

@@ -183,6 +183,8 @@ export default function HomePage() {
         return () => clearInterval(interval)
     }, [])
 
+    const APP_STORE_URL = "https://apps.apple.com/app/safeflow-ai-breathwork-coach/id6755822625"
+
     const content = {
         en: {
             heroTitle1: "Become Your",
@@ -191,6 +193,7 @@ export default function HomePage() {
             heroTag: "For athletes, competitors & anyone who wants to grow",
             ctaButton: "Start your journey",
             learnMore: "How it works",
+            availableOn: "Available on iOS",
 
             card1Title: "Proven Methods",
             card1Text: "Wim Hof, Box Breathing, Cardiac Coherence—techniques used by elite athletes and validated by science.",
@@ -219,6 +222,7 @@ export default function HomePage() {
             heroTag: "Pour sportifs, compétiteurs & ceux qui veulent progresser",
             ctaButton: "Commencer le voyage",
             learnMore: "Comment ça marche",
+            availableOn: "Disponible sur iOS",
 
             card1Title: "Méthodes Éprouvées",
             card1Text: "Wim Hof, Box Breathing, Cohérence Cardiaque—des techniques utilisées par les athlètes d'élite et validées par la science.",
@@ -379,6 +383,27 @@ export default function HomePage() {
                         >
                             {t.learnMore} →
                         </Link>
+                    </div>
+
+                    {/* App Store Badge */}
+                    <div style={{ marginBottom: "60px" }}>
+                        <p style={{ fontSize: "12px", color: colors.textLight, marginBottom: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                            {t.availableOn}
+                        </p>
+                        <a
+                            href={APP_STORE_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ display: "inline-block", transition: "opacity 0.2s" }}
+                            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
+                            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                        >
+                            <img
+                                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83"
+                                alt="Download on the App Store"
+                                style={{ height: "44px", width: "auto" }}
+                            />
+                        </a>
                     </div>
 
                     {/* Integrations */}
