@@ -163,6 +163,7 @@ export default function Navigation({ isSticky = true }: NavigationProps) {
             home: "Home",
             howItWorks: "How it Works",
             about: "About",
+            blog: "Blog",
             login: "Login",
             getStarted: "Get Started",
         },
@@ -170,6 +171,7 @@ export default function Navigation({ isSticky = true }: NavigationProps) {
             home: "Accueil",
             howItWorks: "Fonctionnement",
             about: "À Propos",
+            blog: "Blog",
             login: "Connexion",
             getStarted: "Commencer",
         },
@@ -181,6 +183,7 @@ export default function Navigation({ isSticky = true }: NavigationProps) {
         { href: "/", label: t.home },
         { href: "/how-it-works", label: t.howItWorks },
         { href: "/about", label: t.about },
+        { href: "/blog", label: t.blog },
     ]
 
     return (

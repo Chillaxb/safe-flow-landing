@@ -128,6 +128,9 @@ export default function Footer() {
                         <Link href="/about" style={linkStyle(hoveredLink === "about")} onMouseEnter={() => setHoveredLink("about")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.aboutUs}
                         </Link>
+                        <Link href="/blog" style={linkStyle(hoveredLink === "blog")} onMouseEnter={() => setHoveredLink("blog")} onMouseLeave={() => setHoveredLink(null)}>
+                            {t.blog}
+                        </Link>
                         <Link href="/contact" style={linkStyle(hoveredLink === "contact")} onMouseEnter={() => setHoveredLink("contact")} onMouseLeave={() => setHoveredLink(null)}>
                             {t.contact}
                         </Link>
