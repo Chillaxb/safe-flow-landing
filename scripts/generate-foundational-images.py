@@ -11,7 +11,9 @@ import base64
 import os
 from pathlib import Path
 
-API_KEY = "AIzaSyATQh8h192o74vBJN0gDdAbptpYKIXdkWk"
+API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+if not API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable is required")
 MODEL = "gemini-2.5-flash-image"
 OUTPUT_DIR = Path("/Users/axb/safe-flow-landing/public/images/blog")
 

@@ -10,7 +10,9 @@ import json
 import os
 import time
 
-API_KEY = "AIzaSyATQh8h192o74vBJN0gDdAbptpYKIXdkWk"
+API_KEY = os.environ.get("GOOGLE_API_KEY", "")
+if not API_KEY:
+    raise ValueError("GOOGLE_API_KEY environment variable is required")
 MODEL = "gemini-2.5-flash-image"
 OUTPUT_DIR = "/Users/axb/safe-flow-landing/public/images/blog"
 
