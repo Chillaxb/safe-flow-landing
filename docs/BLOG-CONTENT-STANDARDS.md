@@ -123,6 +123,50 @@ Avant publication, vérifier que tous les liens :
 - Pointent vers le bon contenu
 - Sont en HTTPS
 
+### Vérification des vidéos YouTube
+
+**Les vidéos YouTube peuvent devenir indisponibles.** Avant d'ajouter une vidéo, vérifier :
+
+1. **Que la vidéo existe** (thumbnail disponible)
+2. **Que le contenu correspond** au titre mentionné
+
+**Commande de vérification rapide :**
+
+```bash
+# Vérifier qu'un thumbnail YouTube existe (retourne HTTP 200)
+curl -sI "https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg" | head -n 1
+
+# Exemple :
+curl -sI "https://img.youtube.com/vi/ulHrUVV3Kq4/maxresdefault.jpg" | head -n 1
+# HTTP/2 200 = OK
+# HTTP/2 404 = Vidéo supprimée ou ID incorrect
+```
+
+**Format d'intégration vidéo avec thumbnail :**
+
+```markdown
+[![Titre descriptif](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
+
+**[Titre complet de la vidéo](https://www.youtube.com/watch?v=VIDEO_ID)**
+```
+
+**Cas d'une vidéo indisponible :**
+
+Si une vidéo YouTube n'est plus disponible :
+1. Rechercher une alternative sur YouTube
+2. Si pas de YouTube, utiliser Apple Podcasts/Spotify en backup
+3. Format mixte : `**[Titre](URL_YouTube)** | [Apple Podcasts](URL_Apple)`
+
+**Script de vérification batch :**
+
+```bash
+# Vérifier plusieurs vidéos
+for id in "VIDEO_ID_1" "VIDEO_ID_2" "VIDEO_ID_3"; do
+  status=$(curl -sI "https://img.youtube.com/vi/$id/maxresdefault.jpg" | head -n 1)
+  echo "$id: $status"
+done
+```
+
 ---
 
 ## 3. Structure Article Type
