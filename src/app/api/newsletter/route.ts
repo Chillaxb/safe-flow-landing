@@ -1,7 +1,14 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Lazy initialization to avoid build-time errors when API key is not set
+let resend: Resend | null = null
+function getResend() {
+    if (!resend) {
+        resend = new Resend(process.env.RESEND_API_KEY)
+    }
+    return resend
+}
 
 // Your verified sender email from Resend
 const SENDER_EMAIL = "Safe-Flow <noreply@safe-flow.ai>"
@@ -15,6 +22,14 @@ export async function POST(request: Request) {
             return NextResponse.json(
                 { error: "Valid email required" },
                 { status: 400 }
+            )
+        }
+
+        if (!process.env.RESEND_API_KEY) {
+            console.error("RESEND_API_KEY is not configured")
+            return NextResponse.json(
+                { error: "Email service not configured" },
+                { status: 500 }
             )
         }
 
@@ -72,7 +87,7 @@ export async function POST(request: Request) {
         const t = content[language as "en" | "fr"] || content.en
 
         // Send welcome email to the subscriber
-        const { error: subscriberError } = await resend.emails.send({
+        const { error: subscriberError } = await getResend().emails.send({
             from: SENDER_EMAIL,
             to: email,
             subject: t.subject,
@@ -162,7 +177,7 @@ export async function POST(request: Request) {
         }
 
         // Send notification to admin
-        await resend.emails.send({
+        await getResend().emails.send({
             from: SENDER_EMAIL,
             to: ADMIN_EMAIL,
             subject: `New Beta Signup: ${email}`,
@@ -178,7 +193,7 @@ export async function POST(request: Request) {
         // Also add to Resend audience (contacts) if you have one
         // You can set up an audience in Resend dashboard
         try {
-            await resend.contacts.create({
+            await getResend().contacts.create({
                 email: email,
                 audienceId: process.env.RESEND_AUDIENCE_ID || "",
                 unsubscribed: false,
